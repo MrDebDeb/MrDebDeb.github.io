@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Double Clic Service — Dépannage informatique à domicile</title>
   <meta name="description" content="Double Clic Service : dépannage informatique à domicile (PC, virus, Wi‑Fi) — Zone : Saint‑Béron, Voiron, Aiguebelette, Pont‑de‑la‑Tour." />
-
-  <!-- Leaflet (carte) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <style>
     :root{
       --bg:#0b0f1a;
@@ -18,45 +13,30 @@
       --accent2:#7c7cff;
       --text:#e8ecff;
       --muted:#9aa3c7;
-      --radius:14px;
-      --header-h:78px;
+      --radius:14px
     }
     *{box-sizing:border-box}
-
     body{
       margin:0;min-height:100vh;color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
-        linear-gradient(180deg, rgba(11,15,26,.85), rgba(11,15,26,.95)),
-        url('bg-circuit.png'); /* --> UTILISE TON IMAGE ICI */
-      background-size:cover;
-      background-position:center;
-      background-attachment:fixed;
-      padding-top:var(--header-h);
+        linear-gradient(180deg, rgba(11,15,26,.9), rgba(11,15,26,.98)),
+        url('https://images.unsplash.com/photo-1581090700227-1e37b28d128b?q=80&w=1920&auto=format&fit=crop');
+      background-size:cover;background-position:center;background-attachment:fixed
     }
 
-    /* ===== MENU FIXE (NE SCROLLE PAS) ===== */
-    header{
-      position:fixed;top:0;left:0;right:0;z-index:9999;
-      height:var(--header-h);
-      backdrop-filter:blur(8px);
-      background:linear-gradient(180deg, rgba(11,15,26,.92), rgba(11,15,26,.75));
-      border-bottom:1px solid #1b2446;
-    }
-    .header-inner{
-      max-width:1150px;margin:auto;height:100%;padding:0 26px;
-      display:flex;align-items:center;justify-content:space-between;gap:16px
-    }
-
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#020617;box-shadow:0 10px 30px rgba(0,180,255,.35)}
-    h1{margin:0;font-size:20px}
-    .lead{margin:2px 0 0;color:var(--muted);font-size:13px}
-
-    nav a{color:var(--muted);text-decoration:none;margin-left:20px;font-weight:800}
-    nav a:hover{color:white}
+    .glow{position:fixed;inset:-20%;background:radial-gradient(800px 400px at 10% -10%, rgba(0,180,255,.18), transparent),radial-gradient(600px 300px at 90% 20%, rgba(124,124,255,.16), transparent);pointer-events:none}
 
     .container{max-width:1150px;margin:auto;padding:26px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#020617;box-shadow:0 10px 30px rgba(0,180,255,.35)}
+    h1{margin:0;font-size:22px}
+    .lead{margin:2px 0 0;color:var(--muted)}
+
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:700}
+    nav a:hover{color:white}
 
     .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:34px}
 
@@ -82,9 +62,6 @@
     input,textarea{background:#0b1025;border:1px solid #1b2446;border-radius:10px;padding:10px;color:white}
     textarea{min-height:120px}
 
-    /* Carte */
-    #map{width:100%;height:360px;border-radius:14px;border:1px solid #1b2446;box-shadow:0 20px 60px rgba(0,0,0,.45)}
-
     footer{margin:40px 0 10px;text-align:center;color:var(--muted);font-size:14px}
 
     @media(max-width:900px){.hero{grid-template-columns:1fr}.services,.grid{grid-template-columns:1fr 1fr}}
@@ -92,10 +69,10 @@
   </style>
 </head>
 <body>
+<div class="glow"></div>
+<div class="container">
 
-<!-- ===== MENU HORIZONTAL FIXE ===== -->
-<header>
-  <div class="header-inner">
+  <header>
     <div class="brand">
       <div class="logo">DC</div>
       <div>
@@ -109,10 +86,7 @@
       <a href="#tarifs">Tarifs</a>
       <a href="#contact">Contact</a>
     </nav>
-  </div>
-</header>
-
-<div class="container">
+  </header>
 
   <section class="hero">
     <div class="card">
@@ -136,28 +110,29 @@
 
     <aside class="card">
       <h3>Contact rapide</h3>
-      <p class="small">Téléphone : <b id="phone-placeholder">06 00 00 00 00</b></p>
-      <p class="small">Email : <b id="email-placeholder">contact@example.com</b></p>
+      <p class="small">Téléphone : <b id="phone-placeholder">06 42 95 00 26</b></p>
+      <p class="small">Email : <b id="email-placeholder">doubleclicservices@orange.fr</b></p>
       <p class="small">Du lundi au samedi — 9h à 19h</p>
       <a class="btn" href="#contact">Envoyer un message</a>
     </aside>
   </section>
 
-  $1
-
-  <section id="recuperation" style="margin-top:18px">
+  <section id="services" style="margin-top:26px">
     <div class="card">
-      <h3>Récupération de données (PC en panne)</h3>
-      <p class="small">En cas de PC qui ne démarre plus, de disque dur défectueux ou de suppression accidentelle, je propose la récupération de vos documents, photos et fichiers importants. Diagnostic du support, extraction des données lorsque c’est possible et sauvegarde sur support externe. Confidentialité garantie. Devis établi après diagnostic.</p>
+      <h3>Prestations</h3>
+      <div class="grid">
+        <div><b>Matériel</b><p class="small">Nettoyage, SSD, RAM, pannes</p></div>
+        <div><b>Sécurité</b><p class="small">Virus, piratage, comptes</p></div>
+        <div><b>Réseau</b><p class="small">Wi‑Fi, imprimantes, box</p></div>
+        <div><b>Données</b><p class="small">Récupération</p></div>
+      </div>
     </div>
   </section>
 
-  <!-- ===== CARTE ZONE D'INTERVENTION ===== -->
   <section id="zone" style="margin-top:18px">
     <div class="card">
       <h3>Zone d'intervention</h3>
-      <p class="small">Centre : Saint‑Béron — Cercle représentant la zone de déplacement (Voiron, Aiguebelette, Pont‑de‑la‑Tour inclus).</p>
-      <div id="map"></div>
+      <p class="small">Base à Saint‑Béron. Déplacements entre Voiron, Aiguebelette et Le Pont‑de‑la‑Tour. Autres communes sur demande.</p>
     </div>
   </section>
 
@@ -204,7 +179,7 @@ const result=document.getElementById('formResult');
 
 form.addEventListener('submit',function(e){
   e.preventDefault();
-  const name=document.getElementById('name').value;
+  const name=nameInput=name=document.getElementById('name').value;
   const phone=document.getElementById('phone').value;
   const email=document.getElementById('email').value;
   const message=document.getElementById('message').value;
@@ -212,13 +187,6 @@ form.addEventListener('submit',function(e){
   window.location.href=`mailto:${CONFIG.EMAIL}?subject=Contact site&body=${body}`;
   result.textContent="Votre logiciel de mail va s'ouvrir.";
 });
-
-/* ===== CARTE SAINT-BÉRON + CERCLE ===== */
-const saintBeron=[45.5046,5.7639]; // Centre Saint‑Béron
-const map=L.map('map').setView(saintBeron,10);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
-L.marker(saintBeron).addTo(map).bindPopup('Double Clic Service — Saint‑Béron');
-L.circle(saintBeron,{radius:25000}).addTo(map); // 25 km de zone
 </script>
 </body>
 </html>
