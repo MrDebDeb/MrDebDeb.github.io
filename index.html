@@ -143,14 +143,12 @@
     </aside>
   </section>
 
-  <section id="services" style="margin-top:26px">
+  $1
+
+  <section id="recuperation" style="margin-top:18px">
     <div class="card">
-      <h3>Prestations</h3>
-      <div class="grid">
-        <div><b>Matériel</b><p class="small">Nettoyage, SSD, RAM, pannes</p></div>
-        <div><b>Sécurité</b><p class="small">Virus, piratage, comptes</p></div>
-        <div><b>Réseau</b><p class="small">Wi‑Fi, imprimantes, box</p></div>
-      </div>
+      <h3>Récupération de données (PC en panne)</h3>
+      <p class="small">En cas de PC qui ne démarre plus, de disque dur défectueux ou de suppression accidentelle, je propose la récupération de vos documents, photos et fichiers importants. Diagnostic du support, extraction des données lorsque c’est possible et sauvegarde sur support externe. Confidentialité garantie. Devis établi après diagnostic.</p>
     </div>
   </section>
 
@@ -220,8 +218,7 @@ const saintBeron=[45.5046,5.7639]; // Centre Saint‑Béron
 const map=L.map('map').setView(saintBeron,10);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
 L.marker(saintBeron).addTo(map).bindPopup('Double Clic Service — Saint‑Béron');
-L.circle(saintBeron,{radius:12000}).addTo(map); // 12 km de zone
+L.circle(saintBeron,{radius:25000}).addTo(map); // 25 km de zone
 </script>
 </body>
 </html>
-
