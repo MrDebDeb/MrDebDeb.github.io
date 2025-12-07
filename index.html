@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Double Clic Service — Dépannage informatique à domicile</title>
+  <meta name="description" content="Double Clic Service : dépannage informatique à domicile (PC, virus, Wi‑Fi) — Zone : Saint‑Béron, Voiron, Aiguebelette, Pont‑de‑la‑Tour." />
+
+  <!-- Leaflet (carte) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b0f1a;
+      --card:#0f1526ee;
+      --accent:#00b4ff;
+      --accent2:#7c7cff;
+      --text:#e8ecff;
+      --muted:#9aa3c7;
+      --radius:14px;
+      --header-h:78px;
+    }
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;min-height:100vh;color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        linear-gradient(180deg, rgba(11,15,26,.85), rgba(11,15,26,.95)),
+        url('bg-circuit.png'); /* --> UTILISE TON IMAGE ICI */
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      padding-top:var(--header-h);
+    }
+
+    /* ===== MENU FIXE (NE SCROLLE PAS) ===== */
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:9999;
+      height:var(--header-h);
+      backdrop-filter:blur(8px);
+      background:linear-gradient(180deg, rgba(11,15,26,.92), rgba(11,15,26,.75));
+      border-bottom:1px solid #1b2446;
+    }
+    .header-inner{
+      max-width:1150px;margin:auto;height:100%;padding:0 26px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px
+    }
+
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#020617;box-shadow:0 10px 30px rgba(0,180,255,.35)}
+    h1{margin:0;font-size:20px}
+    .lead{margin:2px 0 0;color:var(--muted);font-size:13px}
+
+    nav a{color:var(--muted);text-decoration:none;margin-left:20px;font-weight:800}
+    nav a:hover{color:white}
+
+    .container{max-width:1150px;margin:auto;padding:26px}
+
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:34px}
+
+    .card{background:var(--card);backdrop-filter:blur(6px);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.45);border:1px solid #1b2446;padding:22px}
+
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#020617;font-weight:800;font-size:12px}
+
+    h2{margin:10px 0 8px;font-size:28px}
+    h3{margin:0 0 10px}
+    p{color:var(--muted)}
+
+    .btn{display:inline-block;margin-top:10px;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#020617;font-weight:900;text-decoration:none;box-shadow:0 10px 30px rgba(0,180,255,.4)}
+
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .service{background:#0b1025;border:1px solid #1b2446;border-radius:10px;padding:12px;font-size:14px}
+    .service b{color:white}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .small{font-size:14px;color:var(--muted)}
+
+    /* Form */
+    form{display:flex;flex-direction:column;gap:10px}
+    input,textarea{background:#0b1025;border:1px solid #1b2446;border-radius:10px;padding:10px;color:white}
+    textarea{min-height:120px}
+
+    /* Carte */
+    #map{width:100%;height:360px;border-radius:14px;border:1px solid #1b2446;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+
+    footer{margin:40px 0 10px;text-align:center;color:var(--muted);font-size:14px}
+
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.services,.grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.services,.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<!-- ===== MENU HORIZONTAL FIXE ===== -->
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="logo">DC</div>
+      <div>
+        <h1>Double Clic Service</h1>
+        <div class="lead">Dépannage informatique à domicile — Saint‑Béron</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#zone">Zone</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <div class="card">
+      <span class="badge">Technicien à domicile</span>
+      <h2>Votre expert informatique de proximité</h2>
+      <p>Je dépanne vos ordinateurs, virus, connexions Internet et réseaux Wi‑Fi à votre domicile ou dans votre petite entreprise.</p>
+
+      <div class="services">
+        <div class="service"><b>PC & Windows</b><br>Réparation, lenteur, plantages</div>
+        <div class="service"><b>Virus</b><br>Nettoyage & sécurisation</div>
+        <div class="service"><b>Wi‑Fi</b><br>Box, réseau, lenteurs</div>
+        <div class="service"><b>Installation</b><br>Logiciels & périphériques</div>
+        <div class="service"><b>Sauvegarde</b><br>Données & récupération</div>
+        <div class="service"><b>Entreprises</b><br>Petites structures</div>
+      </div>
+
+      <a class="btn" href="#contact">Demande d'intervention</a>
+
+      <p class="small" style="margin-top:10px">Zone : Saint‑Béron, Voiron → Aiguebelette, Le Pont‑de‑la‑Tour</p>
+    </div>
+
+    <aside class="card">
+      <h3>Contact rapide</h3>
+      <p class="small">Téléphone : <b id="phone-placeholder">06 00 00 00 00</b></p>
+      <p class="small">Email : <b id="email-placeholder">contact@example.com</b></p>
+      <p class="small">Du lundi au samedi — 9h à 19h</p>
+      <a class="btn" href="#contact">Envoyer un message</a>
+    </aside>
+  </section>
+
+  <section id="services" style="margin-top:26px">
+    <div class="card">
+      <h3>Prestations</h3>
+      <div class="grid">
+        <div><b>Matériel</b><p class="small">Nettoyage, SSD, RAM, pannes</p></div>
+        <div><b>Sécurité</b><p class="small">Virus, piratage, comptes</p></div>
+        <div><b>Réseau</b><p class="small">Wi‑Fi, imprimantes, box</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARTE ZONE D'INTERVENTION ===== -->
+  <section id="zone" style="margin-top:18px">
+    <div class="card">
+      <h3>Zone d'intervention</h3>
+      <p class="small">Centre : Saint‑Béron — Cercle représentant la zone de déplacement (Voiron, Aiguebelette, Pont‑de‑la‑Tour inclus).</p>
+      <div id="map"></div>
+    </div>
+  </section>
+
+  <section id="tarifs" style="margin-top:18px">
+    <div class="card">
+      <h3>Tarifs indicatifs</h3>
+      <div class="services">
+        <div class="service">Diagnostic — 40 €</div>
+        <div class="service">Intervention 1h — 55 €</div>
+        <div class="service">30 min supp. — 25 €</div>
+        <div class="service">Entreprise — Devis</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="margin-top:18px">
+    <div class="card">
+      <h3>Contact</h3>
+      <form id="contactForm">
+        <input id="name" placeholder="Nom" required>
+        <input id="phone" placeholder="Téléphone" required>
+        <input id="email" type="email" placeholder="Email" required>
+        <textarea id="message" placeholder="Votre problème" required></textarea>
+        <button class="btn" type="submit">Envoyer</button>
+        <div id="formResult" class="small"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Double Clic Service — Dépannage informatique
+  </footer>
+</div>
+
+<script>
+const CONFIG={EMAIL:'contact@example.com',PHONE:'06 00 00 00 00'};
+
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('phone-placeholder').textContent=CONFIG.PHONE;
+document.getElementById('email-placeholder').textContent=CONFIG.EMAIL;
+
+const form=document.getElementById('contactForm');
+const result=document.getElementById('formResult');
+
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('name').value;
+  const phone=document.getElementById('phone').value;
+  const email=document.getElementById('email').value;
+  const message=document.getElementById('message').value;
+  const body=encodeURIComponent(`Nom: ${name}\nTel: ${phone}\nEmail: ${email}\n\nMessage:\n${message}`);
+  window.location.href=`mailto:${CONFIG.EMAIL}?subject=Contact site&body=${body}`;
+  result.textContent="Votre logiciel de mail va s'ouvrir.";
+});
+
+/* ===== CARTE SAINT-BÉRON + CERCLE ===== */
+const saintBeron=[45.5046,5.7639]; // Centre Saint‑Béron
+const map=L.map('map').setView(saintBeron,10);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+L.marker(saintBeron).addTo(map).bindPopup('Double Clic Service — Saint‑Béron');
+L.circle(saintBeron,{radius:12000}).addTo(map); // 12 km de zone
+</script>
+</body>
+</html>
+
