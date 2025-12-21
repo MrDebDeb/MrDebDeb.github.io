@@ -6,17 +6,16 @@
 
   <title>Dépannage informatique à domicile à Saint-Béron | Double Clic Service</title>
 
-  <meta name="description" content="Dépannage informatique à domicile à Saint-Béron et 10 km alentours : PC, virus, Wi-Fi, installations. Intervention rapide." />
+  <meta name="description" content="Dépannage informatique à domicile à Saint-Béron et 10 km alentours : PC, virus, Wi-Fi, installations. Tarifs clairs." />
   <meta name="robots" content="index, follow">
   <meta name="geo.region" content="FR-38">
   <meta name="geo.placename" content="Saint-Béron">
 
-  <!-- Leaflet (carte) -->
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
     :root{
-      --bg:#0b0f1a;
       --card:#0f1526ee;
       --accent:#00b4ff;
       --accent2:#7c7cff;
@@ -26,105 +25,116 @@
     }
     *{box-sizing:border-box}
     body{
-      margin:0;min-height:100vh;color:var(--text);
+      margin:0;color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:
-        linear-gradient(180deg, rgba(11,15,26,.9), rgba(11,15,26,.98)),
-        url('https://images.unsplash.com/photo-1581090700227-1e37b28d128b?q=80&w=1920&auto=format&fit=crop');
-      background-size:cover;background-position:center;background-attachment:fixed
+      background:linear-gradient(180deg,#0b0f1a,#020617)
     }
-
-    .glow{position:fixed;inset:-20%;background:radial-gradient(800px 400px at 10% -10%, rgba(0,180,255,.18), transparent),radial-gradient(600px 300px at 90% 20%, rgba(124,124,255,.16), transparent);pointer-events:none}
-
     .container{max-width:1150px;margin:auto;padding:26px}
-
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#020617}
-
-    h1{margin:0;font-size:22px}
-    .lead{color:var(--muted)}
-
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:700}
+    header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    nav a{color:var(--muted);margin-left:18px;text-decoration:none;font-weight:700}
     nav a:hover{color:white}
-
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:34px}
-
-    .card{background:var(--card);backdrop-filter:blur(6px);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.45);border:1px solid #1b2446;padding:22px}
-
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#020617;font-weight:800;font-size:12px}
-
-    h2{margin:10px 0 8px;font-size:28px}
-    h3{margin-bottom:10px}
-    p{color:var(--muted)}
-
-    .btn{display:inline-block;margin-top:10px;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#020617;font-weight:900;text-decoration:none}
-
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .service{background:#0b1025;border:1px solid #1b2446;border-radius:10px;padding:12px;font-size:14px}
-
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .small{font-size:14px;color:var(--muted)}
-
-    form{display:flex;flex-direction:column;gap:10px}
-    input,textarea{background:#0b1025;border:1px solid #1b2446;border-radius:10px;padding:10px;color:white}
-
+    h1,h2,h3{margin-top:0}
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      border:1px solid #1b2446;
+      margin-top:22px
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#020617;
+      font-weight:900;
+      text-decoration:none
+    }
+    .services,.tarifs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px
+    }
+    .box{
+      background:#0b1025;
+      border:1px solid #1b2446;
+      border-radius:10px;
+      padding:14px;
+      font-size:14px
+    }
+    .small{color:var(--muted);font-size:14px}
     #map{height:350px;border-radius:12px;margin-top:10px}
-
-    footer{text-align:center;margin-top:40px;color:var(--muted)}
-
-    @media(max-width:900px){.hero{grid-template-columns:1fr}}
+    footer{text-align:center;color:var(--muted);margin:40px 0 10px}
+    @media(max-width:800px){
+      .services,.tarifs{grid-template-columns:1fr}
+    }
   </style>
 </head>
 
 <body>
-<div class="glow"></div>
 <div class="container">
 
 <header>
-  <div class="brand">
-    <div class="logo">DC</div>
-    <div>
-      <h1>Double Clic Service</h1>
-      <div class="lead">Dépannage informatique à domicile — Saint-Béron</div>
-    </div>
+  <div>
+    <h1>Double Clic Service</h1>
+    <div class="small">Dépannage informatique à domicile — Saint-Béron</div>
   </div>
   <nav>
     <a href="#services">Services</a>
-    <a href="#zone">Zone</a>
     <a href="#tarifs">Tarifs</a>
+    <a href="#zone">Zone</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
-<section class="hero">
-  <div class="card">
-    <span class="badge">Technicien à domicile</span>
-    <h2>Votre expert informatique de proximité</h2>
-    <p>Intervention rapide pour PC, virus, Wi-Fi et installations.</p>
-
-    <a class="btn" href="tel:0642950026">📞 Appeler maintenant</a>
-    <p class="small">✔ Sans engagement • ✔ Données respectées • ✔ Devis clair</p>
-  </div>
-
-  <aside class="card">
-    <p class="small">Téléphone :
-      <a href="tel:0642950026"><b>06 42 95 00 26</b></a>
-    </p>
-    <p class="small">Email :
-      <a href="mailto:doubleclicservices@orange.fr">
-        <b>doubleclicservices@orange.fr</b>
-      </a>
-    </p>
-  </aside>
+<!-- HERO -->
+<section class="card">
+  <h2>Votre technicien informatique de proximité</h2>
+  <p class="small">Intervention rapide à domicile pour particuliers et petites entreprises.</p>
+  <a class="btn" href="tel:0642950026">📞 Appeler maintenant</a>
 </section>
 
-<section id="zone" style="margin-top:30px">
-  <div class="card">
-    <h3>Zone d'intervention (10 km)</h3>
-    <p class="small">Basé à Saint-Béron – déplacements dans un rayon de 10 km.</p>
-    <div id="map"></div>
+<!-- SERVICES -->
+<section id="services" class="card">
+  <h3>Types d’intervention</h3>
+  <div class="services">
+    <div class="box"><b>PC & Windows</b><br>Lenteurs, pannes, écrans bleus</div>
+    <div class="box"><b>Virus & sécurité</b><br>Nettoyage, protection, piratage</div>
+    <div class="box"><b>Wi-Fi & réseau</b><br>Box, imprimantes, connexions</div>
+    <div class="box"><b>Installation</b><br>Logiciels, PC, périphériques</div>
+    <div class="box"><b>Données</b><br>Sauvegarde, récupération</div>
+    <div class="box"><b>Entreprises</b><br>Petites structures, devis</div>
   </div>
+</section>
+
+<!-- TARIFS -->
+<section id="tarifs" class="card">
+  <h3>Tarifs indicatifs</h3>
+  <p class="small">Tarifs transparents – pas de surprise</p>
+  <div class="tarifs">
+    <div class="box">Diagnostic<br><b>40 €</b></div>
+    <div class="box">Intervention (1h)<br><b>55 €</b></div>
+    <div class="box">30 min supplémentaires<br><b>25 €</b></div>
+    <div class="box">Déplacement<br><b>Inclus (10 km)</b></div>
+    <div class="box">Entreprises<br><b>Sur devis</b></div>
+  </div>
+</section>
+
+<!-- ZONE -->
+<section id="zone" class="card">
+  <h3>Zone d’intervention (10 km)</h3>
+  <p class="small">Basé à Saint-Béron — Voiron, Aiguebelette, Pont-de-la-Tour</p>
+  <div id="map"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="card">
+  <h3>Contact</h3>
+  <p class="small">
+    📞 <a href="tel:0642950026">06 42 95 00 26</a><br>
+    ✉ <a href="mailto:doubleclicservices@orange.fr">doubleclicservices@orange.fr</a><br>
+    ⏱ Lundi au samedi — 9h à 19h
+  </p>
 </section>
 
 <footer>
@@ -133,29 +143,23 @@
 
 </div>
 
-<!-- Leaflet JS -->
+<!-- MAP -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Carte Saint-Béron
 const saintBeron = [45.5015, 5.7355];
-
 const map = L.map('map').setView(saintBeron, 11);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(map);
 
-L.marker(saintBeron).addTo(map)
-  .bindPopup("Double Clic Service<br>Saint-Béron")
-  .openPopup();
+L.marker(saintBeron).addTo(map).bindPopup("Double Clic Service<br>Saint-Béron");
 
 L.circle(saintBeron, {
   radius: 10000,
   color: '#00b4ff',
-  fillColor: '#00b4ff',
   fillOpacity: 0.15
 }).addTo(map);
 </script>
