@@ -23,60 +23,115 @@
   --radius:14px
 }
 *{box-sizing:border-box}
+
 body{
-  margin:0;color:var(--text);
+  margin:0;
+  color:var(--text);
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
   background:
-    linear-gradient(180deg, rgba(11,15,26,.9), rgba(11,15,26,.98)),
-    url('https://images.unsplash.com/photo-1581090700227-1e37b28d128b?q=80&w=1920&auto=format&fit=crop');
-  background-size:cover;background-attachment:fixed
+    linear-gradient(180deg, rgba(11,15,26,.92), rgba(11,15,26,.98)),
+    url('bg-circuit.png');
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
 }
-.container{max-width:1150px;margin:auto;padding:26px}
-.glow{position:fixed;inset:-20%;pointer-events:none;
-background:
-radial-gradient(800px 400px at 10% -10%, rgba(0,180,255,.18), transparent),
-radial-gradient(600px 300px at 90% 20%, rgba(124,124,255,.16), transparent)}
 
+.container{max-width:1150px;margin:auto;padding:26px}
+
+.glow{
+  position:fixed;
+  inset:-20%;
+  pointer-events:none;
+  background:
+    radial-gradient(800px 400px at 10% -10%, rgba(0,180,255,.18), transparent),
+    radial-gradient(600px 300px at 90% 20%, rgba(124,124,255,.16), transparent)
+}
+
+/* HEADER FIXE */
 header{
-  position:sticky;top:0;z-index:1000;
-  background:rgba(11,15,26,.9);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(11,15,26,.92);
   backdrop-filter:blur(8px);
   border-bottom:1px solid #1b2446;
 }
+
 header .inner{
-  max-width:1150px;margin:auto;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 26px
+  max-width:1150px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 26px;
 }
-.brand{display:flex;align-items:center;gap:14px}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px
+}
+
 .logo{
-  width:56px;height:56px;border-radius:14px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  display:flex;align-items:center;justify-content:center;
-  color:#020617;font-weight:900
+  width:56px;
+  height:56px;
+  border-radius:12px;
+  background:#020617;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-nav a{color:var(--muted);margin-left:18px;text-decoration:none;font-weight:700}
+
+.logo img{
+  width:44px;
+  height:auto;
+}
+
+nav a{
+  color:var(--muted);
+  margin-left:18px;
+  text-decoration:none;
+  font-weight:700
+}
 nav a:hover{color:white}
 
 .spacer{height:90px}
 
-.hero{display:grid;grid-template-columns:1fr 380px;gap:24px}
+/* LAYOUT */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:24px
+}
+
 .card{
-  background:var(--card);border:1px solid #1b2446;
-  border-radius:var(--radius);padding:22px;
+  background:var(--card);
+  border:1px solid #1b2446;
+  border-radius:var(--radius);
+  padding:22px;
   box-shadow:0 20px 60px rgba(0,0,0,.45)
 }
+
 .badge{
   background:linear-gradient(135deg,var(--accent),var(--accent2));
-  padding:6px 10px;border-radius:999px;
-  color:#020617;font-weight:800;font-size:12px
+  padding:6px 10px;
+  border-radius:999px;
+  color:#020617;
+  font-weight:800;
+  font-size:12px
 }
+
 .btn{
-  display:inline-block;margin-top:12px;
-  padding:12px 18px;border-radius:12px;
+  display:inline-block;
+  margin-top:12px;
+  padding:12px 18px;
+  border-radius:12px;
   background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#020617;font-weight:900;text-decoration:none
+  color:#020617;
+  font-weight:900;
+  text-decoration:none
 }
+
 .small{font-size:14px;color:var(--muted)}
 
 .responsive-services{
@@ -84,28 +139,49 @@ nav a:hover{color:white}
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:12px
 }
+
 .service{
-  background:#0b1025;border:1px solid #1b2446;
-  border-radius:10px;padding:12px;font-size:14px
+  background:#0b1025;
+  border:1px solid #1b2446;
+  border-radius:10px;
+  padding:12px;
+  font-size:14px
 }
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:16px
 }
 
+/* FORM */
 form{display:flex;flex-direction:column;gap:10px}
+
 input,textarea{
-  background:#0b1025;border:1px solid #1b2446;
-  border-radius:10px;padding:10px;color:white
+  background:#0b1025;
+  border:1px solid #1b2446;
+  border-radius:10px;
+  padding:10px;
+  color:white
 }
+
 textarea{min-height:120px}
 
-#map{height:350px;border-radius:12px;margin-top:10px}
+#map{
+  height:350px;
+  border-radius:12px;
+  margin-top:10px
+}
 
-footer{text-align:center;margin:40px 0;color:var(--muted)}
+footer{
+  text-align:center;
+  margin:40px 0;
+  color:var(--muted)
+}
 
-@media(max-width:900px){.hero{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -115,12 +191,15 @@ footer{text-align:center;margin:40px 0;color:var(--muted)}
 <header>
   <div class="inner">
     <div class="brand">
-      <div class="logo">DC</div>
+      <div class="logo">
+        <img src="logo.png" alt="Double Clic Service">
+      </div>
       <div>
         <b>Double Clic Service</b><br>
         <span class="small">Dépannage informatique — Saint-Béron</span>
       </div>
     </div>
+
     <nav>
       <a href="#services">Services</a>
       <a href="#zone">Zone</a>
@@ -160,11 +239,11 @@ footer{text-align:center;margin:40px 0;color:var(--muted)}
     <h3>Types d’intervention</h3>
     <div class="responsive-services">
       <div class="service"><b>PC & Windows</b><br>Lenteur, pannes</div>
-      <div class="service"><b>Virus & sécurité</b><br>Nettoyage, protection</div>
+      <div class="service"><b>Virus & sécurité</b><br>Nettoyage</div>
       <div class="service"><b>Wi-Fi & Internet</b><br>Box, réseau</div>
-      <div class="service"><b>Installation</b><br>Logiciels, imprimantes</div>
+      <div class="service"><b>Installation</b><br>Logiciels</div>
       <div class="service"><b>Sauvegarde</b><br>Données</div>
-      <div class="service"><b>Entreprises</b><br>TPE & indépendants</div>
+      <div class="service"><b>Entreprises</b><br>TPE</div>
     </div>
   </div>
 </section>
@@ -223,18 +302,27 @@ footer{text-align:center;margin:40px 0;color:var(--muted)}
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
 
+/* CARTE */
 const map=L.map('map').setView([45.5015,5.7355],11);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
 attribution:'© OpenStreetMap'}).addTo(map);
 L.marker([45.5015,5.7355]).addTo(map).bindPopup("Double Clic Service");
-L.circle([45.5015,5.7355],{radius:10000,color:'#00b4ff',fillOpacity:.15}).addTo(map);
+L.circle([45.5015,5.7355],{
+  radius:10000,
+  color:'#00b4ff',
+  fillOpacity:.15
+}).addTo(map);
 
+/* FORMULAIRE */
 document.getElementById('contactForm').addEventListener('submit',e=>{
-e.preventDefault();
-const body=encodeURIComponent(
-`Nom: ${name.value}\nTel: ${phone.value}\nEmail: ${email.value}\n\n${message.value}`);
-window.location.href=`mailto:doubleclicservices@orange.fr?subject=Contact site&body=${body}`;
-document.getElementById('formResult').textContent="Votre messagerie va s’ouvrir.";
+  e.preventDefault();
+  const body=encodeURIComponent(
+    `Nom: ${name.value}\nTel: ${phone.value}\nEmail: ${email.value}\n\n${message.value}`
+  );
+  window.location.href=
+    `mailto:doubleclicservices@orange.fr?subject=Contact site&body=${body}`;
+  document.getElementById('formResult').textContent=
+    "Votre messagerie va s’ouvrir.";
 });
 </script>
 
